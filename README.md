@@ -46,7 +46,7 @@ sudo systemctl start xkeysnail
 
 
 ## Troubleshooting 
-To check if the xkeysnail service is running properly, run:
+- To check if the xkeysnail service is running properly, run:
 ```
 sudo systemctl status xkeysnail
 ```
