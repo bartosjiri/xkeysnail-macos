@@ -55,3 +55,6 @@ sudo systemctl status xkeysnail
 ```
 sudo xhost + && sudo systemctl restart xkeysnail
 ```
+
+## Limitations
+- Command key input in terminals is troublesome, since macOS uses <kbd>ctrl</kbd> for all terminal operations. While the provided scripts provide a workaround for this, you won't be able to use these in built-in terminals (i.e. VS Code).
