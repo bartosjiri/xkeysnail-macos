@@ -51,7 +51,7 @@ To check if the xkeysnail service is running properly, run:
 sudo systemctl status xkeysnail
 ```
 
-- If you encounter errors like `Xlib.error.DisplayConnectionError: Can't connect to display ":0.0": b'No protocol specified\n', try:
+- If you encounter errors like `Xlib.error.DisplayConnectionError: Can't connect to display ":0.0": b'No protocol specified\n'`, make sure you have `xhost` package installed and try:
 ```
 sudo xhost + && sudo systemctl restart xkeysnail
 ```
