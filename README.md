@@ -1,13 +1,57 @@
+# Xkeysnail macOS config
+A Xkeysnail config that emulates macOS styled keyboard controls/shortcuts in Linux and X11.
+
 ## Installation
+1. Install Xkeysnail using your package manager or following [Xkeysnail installation](https://github.com/mooz/xkeysnail#installation) instructions.
 
-1. download xkeysnail
+2. Clone or download the provided config file to a location of your preference.
 
-2. download the config
+3. Edit the config file and replace `Your-terminal-app-here` with the window class of your terminal application.
 
-3. create service
+   *To get the window class name, run `xprop WM_CLASS` and click on the window of the terminal application.*  
 
-4. run service
+4. Create a systemd service for xkeysnail to run automatically on the background:
 
-5. service status
+```
+cd /etc/systemd/system && sudo nano xkeysnail.service
+```
 
-6. xhost +x if it doesnt works
+5. Insert the following code to the service config and edit the path to the provided config file:
+```
+[Unit]
+Description=xkeysnail
+
+[Service]
+Type=simple
+KillMode=process
+ExecStart=/usr/bin/sudo /usr/bin/xkeysnail --quiet --watch /path/to/your/config-macos.py
+ExecStop=/usr/bin/sudo /usr/bin/killall xkeysnail
+Restart=on-failure
+RestartSec=3
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=graphical.target
+```
+
+6. Enable the xkeysnail service:
+```
+sudo systemctl enable xkeysnail
+```
+
+7. Start the xkeysnail service:
+```
+sudo systemctl start xkeysnail
+```
+
+
+## Troubleshooting 
+To check if the xkeysnail service is running properly, run:
+```
+sudo systemctl status xkeysnail
+```
+
+- If you encounter errors like `Xlib.error.DisplayConnectionError: Can't connect to display ":0.0": b'No protocol specified\n', try:
+```
+sudo xhost + && sudo systemctl restart xkeysnail
+```
